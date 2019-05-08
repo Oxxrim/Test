@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+<f:view>
+    <h:head>
+        <title></title>
+    </h:head>
+
+    <h:body>
+        <h:form id="test-task">
+            <p:panel header="Welcome">
+                <h:panelGrid columns="2" cellpadding="4">
+                    <h:outputText value="Login: " />
+                    <p:inputText id="first-name" value="#{mainBean.login}" />
+
+                    <h:outputText value="Password: " />
+                    <p:inputText id="last-name" value="#{mainBean.password}" />
+
+                    <p:commandButton id="submit" value="Submit" update="greeting-panel" oncomplete="PF('greetingDialog').show()"
+                    action="#{mainBean.checkUser()}"/>
+                </h:panelGrid>
+            </p:panel>
+            <p:dialog header="Greeting" widgetVar="greetingDialog" modal="true" resizable="false" dynamic="true">
+                <h:panelGrid id="greeting-panel" columns="1" cellpadding="4">
+                    <h:outputText value="#{mainBean.checkUser()}" />
+                </h:panelGrid>
+            </p:dialog>
+        </h:form>
+    </h:body>
+</f:view>
+</html>
