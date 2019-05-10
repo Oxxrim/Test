@@ -6,13 +6,17 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://java.sun.com/jsf/core">
 
+
     <h:head>
         <title>Admin Page</title>
     </h:head>
 
     <h:body>
         <h:form>
-            <p:dataTable var="user" value="#{adminBean.users}" onRowClick="PF('editDialog').show()" selection="#{adminBean.selectedUser}" selectionMode="single" rowKey="#{user.login}">
+            <p:dataTable var="user" value="#{adminBean.users}"  selection="#{adminBean.selUser}" selectionMode="single" rowKey="#{user.login}">
+
+                <p:ajax event="rowSelect" oncomplete="PF('editDialog').show()"  />
+
                 <p:column headerText="Login">>
                     <h:outputText value="#{user.login}"/>
                 </p:column>
@@ -25,22 +29,23 @@
                     <h:outputText value="#{user.role}" />
                 </p:column>
                 <p:column headerText="Delete">
-                    <h:commandButton id="submit" value="delete" action="#{adminBean.delete(user.login, user.password, user.role)}"/>
+                    <h:commandButton id="submit"  value="delete" action="#{adminBean.delete(user.login, user.password, user.role)}"/>
                 </p:column>
             </p:dataTable>
-
-            <p:dialog header="Edit" widgetVar="editDialog" modal="true" resizable="false" dynamic="true">
-                <h:panelGrid id="greeting-panel" columns="1" cellpadding="4">
+        </h:form>
+        <h:form>
+            <p:dialog id="edit" header="Edit" widgetVar="editDialog" modal="true" resizable="false" dynamic="true">
+                <h:panelGrid id="edit-panel" columns="1" cellpadding="4">
                     <h:outputText value="Login: " />
-                    <p:inputText id="log" value="#{adminBean.selectedUser.login}" />
+                    <h:outputText value="#{adminBean.selUser.login}" />
 
                     <h:outputText value="Password: " />
-                    <p:inputText id="pass" value="#{adminBean.selectedUser.password}" />
+                    <p:inputText id="pass" value="#{adminBean.selUser.password}" />
 
                     <h:outputText value="Role: " />
-                    <p:inputText id="rol" value="#{adminBean.selectedUser.role}" />
+                    <p:inputText id="rol" value="#{adminBean.selUser.role}" />
 
-                    <h:commandButton id="submitt" value="save" action="#{adminBean.save(adminBean.selectedUser.login, adminBean.selectedUser.password, adminBean.selectedUser.role)}"/>
+                    <h:commandButton id="submitt" value="save" action="#{adminBean.save(adminBean.selUser.login, adminBean.selUser.password, adminBean.selUser.role)}"/>
                 </h:panelGrid>
             </p:dialog>
         </h:form>

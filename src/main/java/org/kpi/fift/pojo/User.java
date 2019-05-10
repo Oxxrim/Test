@@ -42,4 +42,10 @@ public class User {
 
     public User() {
     }
+
+    public User(String login, String password, String role) {
+        this.login = login;
+        this.password = password;
+        this.role = role;
+    }
 }

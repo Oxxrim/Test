@@ -2,6 +2,7 @@ package org.kpi.fift.bean;
 
 import org.kpi.fift.dao.UserDAO;
 import org.kpi.fift.pojo.User;
+import org.primefaces.event.SelectEvent;
 
 import javax.annotation.PostConstruct;
 import javax.inject.Named;
@@ -18,7 +19,7 @@ public class AdminBean {
 
     private UserDAO userDAO = new UserDAO();
 
-    private User selectedUser;
+    private User selUser;
 
     private List<User> users;
 
@@ -82,11 +83,15 @@ public class AdminBean {
         this.rol = role;
     }
 
-    public User getSelectedUser() {
-        return selectedUser;
+    public User getSelUser() {
+        return selUser;
     }
 
-    public void setSelectedUser(User selectedUser) {
-        this.selectedUser = selectedUser;
+    public void setSelUser(User selUser) {
+        this.selUser = selUser;
     }
+
+//    public void onRowSelect(SelectEvent event) {
+//        Faces
+//    }
 }
